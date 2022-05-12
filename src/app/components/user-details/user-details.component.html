@@ -1,0 +1,30 @@
+<form #f="ngForm" (ngSubmit)="f.form.valid">
+    <div class="form-row">
+        <div class="form-group">
+            <div class="w3-panel w3-white form">
+                <p>First Name </p>
+                <input type="text" [(ngModel)]="FirstName" name="FirstName" required>
+                <div class="alert alert-danger" *ngIf="f.submitted && FirstName == ''">
+                    First Name is required!
+                </div>
+                <p>Last Name </p>
+                <input type="text" [(ngModel)]="LastName" name="LastName" required>
+                <div class="alert alert-danger" *ngIf="f.submitted && LastName == ''">
+                    Last Name is required!
+                </div>
+                <p>User Name </p>
+                <input type="text" [(ngModel)]="UserName" name="UserName" required>
+                <div class="alert alert-danger" *ngIf="UserName == FirstName || UserName == LastName || UserName == ''">
+                    User Name is not valid!
+                </div>
+                <p>Price </p>
+                <input type="date" #myDate [value]="DOB | date:'yyyy-MM-dd'" (input)="DOB=parseDate($any($event).target.value)" required>
+                <div class="alert alert-danger" *ngIf="f.submitted && DOB == null">
+                    DOB is required!
+                </div>
+                <button type="submit" (click)="UpdateUser(f.form.valid, MyUser.ID)">Save</button> 
+                <input type="text" value="User Update Succeeded!" *ngIf="IsUpdate">
+            </div>
+        </div>
+    </div>
+</form>
